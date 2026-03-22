@@ -1,19 +1,157 @@
-{
-  "name": "deal-finder",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@supabase/supabase-js": "^2.39.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
-    "vite": "^5.0.0"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  }
-}
+# Deal Finder — Setup Guide
+# jamiefinerslice / jamie@finerslice.com
+# GitHub + Vercel + Supabase
+
+=======================================================
+STEP 1 — Create the GitHub Repository (2 minutes)
+=======================================================
+
+1. Go to github.com — sign in as jamiefinerslice
+2. Click the green "New" button (top left)
+3. Name the repo: deal-finder
+4. Set to Private
+5. Do NOT check any "Initialize" boxes
+6. Click "Create repository"
+
+You'll see an empty repo page. Leave it open.
+
+
+=======================================================
+STEP 2 — Upload the Project Files (3 minutes)
+=======================================================
+
+1. Download the deal-finder.zip file I gave you and unzip it
+   You should have a folder called "deal-finder" with:
+   - package.json
+   - vite.config.js
+   - index.html
+   - .gitignore
+   - schema.sql
+   - src/
+     - main.jsx
+     - App.jsx
+     - SearchScreen.jsx
+     - config.js
+     - useSearches.js
+     - supabase.js
+
+2. On the empty GitHub repo page, click "uploading an existing file"
+   (the link in the middle of the page)
+
+3. Drag the CONTENTS of the deal-finder folder into the upload box
+   (not the folder itself — drag the files and the src folder)
+
+4. Scroll down, click "Commit changes"
+
+Your code is now on GitHub.
+
+
+=======================================================
+STEP 3 — Set Up Supabase Database (5 minutes)
+=======================================================
+
+1. Go to supabase.com — sign in with GitHub
+2. Click "New project"
+   - Name: deal-finder
+   - Database password: save this somewhere safe
+   - Region: US East (closest to NYC)
+   - Click "Create new project" — takes ~2 min to spin up
+
+3. Once ready, click "SQL Editor" in the left sidebar
+
+4. Click "New query"
+
+5. Open the file schema.sql from your deal-finder folder
+   Copy ALL of its contents and paste into the SQL editor
+
+6. Click "Run" (green button)
+   You should see "Success. No rows returned"
+
+7. Now get your API keys:
+   - Click "Project Settings" (gear icon, bottom left)
+   - Click "API"
+   - Copy "Project URL" — looks like: https://xxxx.supabase.co
+   - Copy "anon public" key — long string starting with eyJ...
+   
+   SAVE BOTH — you'll need them in Step 4.
+
+
+=======================================================
+STEP 4 — Deploy to Vercel (3 minutes)
+=======================================================
+
+1. Go to vercel.com — sign in with GitHub
+2. Click "Add New Project"
+3. Find "deal-finder" in your GitHub repos — click "Import"
+4. On the configuration page:
+   - Framework: Vite (should auto-detect)
+   - Root directory: ./ (leave as is)
+   
+5. Click "Environment Variables" and add TWO variables:
+
+   Name: VITE_SUPABASE_URL
+   Value: (paste your Supabase Project URL from Step 3)
+
+   Name: VITE_SUPABASE_ANON_KEY
+   Value: (paste your Supabase anon key from Step 3)
+
+6. Click "Deploy"
+
+Vercel will build and deploy. Takes ~1 minute.
+You'll get a URL like: deal-finder-xxx.vercel.app
+
+
+=======================================================
+STEP 5 — Set Your Custom URL (optional, 2 minutes)
+=======================================================
+
+In Vercel:
+1. Go to your project → Settings → Domains
+2. Click "Edit" next to the auto-generated URL
+3. Change it to something like: deals.finerslice.com or dealfinder-finerslice.vercel.app
+
+Or just bookmark the auto-generated URL — it never changes.
+
+
+=======================================================
+YOUR APP IS LIVE! 
+=======================================================
+
+Open the URL in any browser. You'll see:
+- Deal Finder home screen
+- "Tiny Home Spa" search with all your campground data
+- "Hunter Airbnb Expansion" with your A-frame benchmark
+- AI chat in each search
+
+
+=======================================================
+HOW TO UPDATE GOING FORWARD
+=======================================================
+
+When Claude gives you updated code:
+
+CODE UPDATES (new features, UI changes):
+1. Go to github.com/jamiefinerslice/deal-finder
+2. Click on the file to update (e.g. src/App.jsx)
+3. Click the pencil icon (Edit)
+4. Select all, paste the new code
+5. Click "Commit changes"
+→ Vercel auto-deploys in ~30 seconds
+
+DATA UPDATES (new properties, updated scores):
+1. Claude gives you SQL like:
+   INSERT INTO properties (...) VALUES (...)
+2. Go to supabase.com → your project → SQL Editor
+3. Paste and click Run
+→ Data appears in your app immediately
+
+That's it. No terminal, no installs, no technical knowledge needed.
+
+
+=======================================================
+SUPPORT
+=======================================================
+
+If anything goes wrong, come back to Claude and say:
+"I'm getting [error message] during setup"
+and I'll fix it immediately.
