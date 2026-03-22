@@ -74,7 +74,7 @@ export default function SearchScreen({ searchId, search, db, onBack }) {
       const scoredProps = (search.properties || []).map(p => ({
         ...p, score: scoreProperty(search.type_id, p)
       }))
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
