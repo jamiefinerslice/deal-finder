@@ -85,7 +85,10 @@ export default function SearchScreen({ searchId, search, db, onBack }) {
         })
       })
       const data = await response.json()
-      const raw = data.content?.map(b => b.text || '').join('') || 'Sorry, no response.'
+      console.log('API response:', JSON.stringify(data))
+      const raw = data.content?.map(b => b.text || '').join('')
+        || data.error?.message
+        || JSON.stringify(data)
       const parsed = parseAddProp(raw)
       if (parsed) setAddPreview(parsed)
       await db.appendChatMessage(searchId, 'assistant', raw)
